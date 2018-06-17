@@ -2,10 +2,9 @@ package com.socialmedia.aggregator.dao;
 
 import com.socialmedia.aggregator.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-
+@Service
 public class UserDao {
 
     @Autowired

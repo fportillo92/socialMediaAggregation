@@ -22,7 +22,7 @@ public class UserDao {
         userRepository.delete(user);
     }
 
-    public User findUserByUserName(String userName){
-        return userRepository.findUserByUserName(userName);
+    public User findUserByUserName(String username){
+        return userRepository.findUserByUserName(username);
     }
 }

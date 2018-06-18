@@ -13,9 +13,9 @@ public class UserServiceImpl implements UserService {
     UserDao userDao;
 
     @Override
-    public User getUserByUserName(String userName) throws UserException {
+    public User getUserByUserName(String username) throws UserException {
 
-        User user = userDao.findUserByUserName(userName);
+        User user = userDao.findUserByUserName(username);
 
         if(user != null){
             return user;
@@ -24,11 +24,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User createUser(String userName, String userPassword) throws UserException {
+    public User createUser(String username, String userpassword) throws UserException {
 
-        if (userName != null) {
-            if (userPassword != null) {
-                User user = new User(userName, userPassword);
+        if (username != null) {
+            if (userpassword != null) {
+                User user = new User(username, userpassword);
                 return userDao.createUser(user);
             } else throw new UserException("Password cant be empty");
 
@@ -36,12 +36,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void removeUser(String userName, String userPassword) throws UserException {
+    public void removeUser(String username, String userpassword) throws UserException {
 
-        User user = userDao.findUserByUserName(userName);
+        User user = userDao.findUserByUserName(username);
 
         if (user != null) {
-            if(user.getUserPassword().equals(userPassword)){
+            if(user.getUserpassword().equals(userpassword)){
                 userDao.removeUser(user);
             }else throw new UserException("Invalid password");
 
@@ -51,9 +51,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User updateUser(String userName, String userPassword) throws UserException{
+    public User updateUser(String username, String userpassword) throws UserException{
 
-        User user = userDao.findUserByUserName(userName);
+        User user = userDao.findUserByUserName(username);
 
         return null;
     }

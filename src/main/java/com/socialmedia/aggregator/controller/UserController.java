@@ -18,11 +18,11 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    @RequestMapping(value = "/users/{userName}", method = RequestMethod.GET, produces = "application/json")
-    public ResponseEntity<User> getUser(@PathVariable("userName") String userName){
+    @RequestMapping(value = "/users/{username}", method = RequestMethod.GET, produces = "application/json")
+    public ResponseEntity<User> getUser(@PathVariable("username") String username){
 
         try {
-            return new ResponseEntity<>(userService.getUserByUserName(userName), HttpStatus.OK);
+            return new ResponseEntity<>(userService.getUserByUserName(username), HttpStatus.OK);
         } catch (UserException e) {
             logger.error("Error trying to get the user");
             e.printStackTrace();
@@ -34,7 +34,7 @@ public class UserController {
     @RequestMapping(value = "/users/", method = RequestMethod.POST, produces = "application/json")
     public ResponseEntity<User> createUser(@RequestBody final User user)   {
         try {
-            return new ResponseEntity<>(userService.createUser(user.getUserName(), user.getUserPassword()), HttpStatus.CREATED);
+            return new ResponseEntity<>(userService.createUser(user.getUserName(), user.getUserpassword()), HttpStatus.CREATED);
         } catch (UserException e) {
             logger.error("Error creating the user");
             e.printStackTrace();
@@ -45,7 +45,7 @@ public class UserController {
     @RequestMapping(value = "/users/", method = RequestMethod.DELETE, produces = "application/json")
     public ResponseEntity<User> removeUser(@RequestBody final User user)   {
         try {
-            userService.removeUser(user.getUserName(), user.getUserPassword());
+            userService.removeUser(user.getUserName(), user.getUserpassword());
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (UserException e) {
             logger.error("Error deleting the user");

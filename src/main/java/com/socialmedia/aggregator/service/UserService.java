@@ -5,12 +5,12 @@ import com.socialmedia.aggregator.model.User;
 
 public interface UserService {
 
-    public User getUserByUserName(String userName) throws  UserException;
+    public User getUserByUserName(String username) throws  UserException;
 
-    public User createUser(String userName, String userPassword) throws UserException;
+    public User createUser(String username, String userpassword) throws UserException;
 
-    public void removeUser(String userName, String userPassword) throws UserException;
+    public void removeUser(String username, String userpassword) throws UserException;
 
-    public User updateUser(String userName, String userPassword) throws UserException;
+    public User updateUser(String username, String userpassword) throws UserException;
 
 }

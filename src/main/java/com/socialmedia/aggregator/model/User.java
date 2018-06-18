@@ -1,43 +1,47 @@
 package com.socialmedia.aggregator.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
+@Document
 public class User {
 
-    @Id
-    private Integer id;
-    private String userName;
+    @Id ObjectId _id;
+    //private Integer id;
+    private String username;
+    private String userpassword;
 
-    @JsonIgnore
-    private String userPassword;
-
-    public User(String userName, String userPassword) {
-        this.userName = userName;
-        this.userPassword = userPassword;
+    public User(String username, String userpassword) {
+        this.username = username;
+        this.userpassword = userpassword;
     }
 
-    public Integer getId() {
-        return id;
+    public User(){
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public ObjectId getId() {
+        return _id;
     }
 
-    public String getUserPassword() {
-        return userPassword;
+    public void setId(ObjectId id) {
+        this._id = id;
     }
 
-    public void setUserPassword(String userPassword) {
-        this.userPassword = userPassword;
+    public String getUserpassword() {
+        return userpassword;
+    }
+
+    public void setUserpassword(String userpassword) {
+        this.userpassword = userpassword;
     }
 
     public String getUserName() {
-        return userName;
+        return username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 }

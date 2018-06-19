@@ -10,19 +10,23 @@ public class UserDao {
     @Autowired
     private UserRepository userRepository;
 
-    public User findUserById(Integer id){
+    public User findUserById(Integer id) {
         return userRepository.findUserById(id);
     }
 
-    public User createUser(User user){
+    public User createUser(User user) {
         return userRepository.save(user);
     }
 
-    public void removeUser(User user){
+    public void removeUser(User user) {
         userRepository.delete(user);
     }
 
-    public User findUserByUserName(String username){
+    public User findUserByUserName(String username) {
         return userRepository.findUserByUserName(username);
+    }
+
+    public User updateUser(User user) {
+        return userRepository.save(user);
     }
 }

@@ -38,7 +38,7 @@ public class Usertag implements Interest {
 
     @Override
     public int hashCode() {
-        return tag.hashCode();
+        return _id.hashCode() * tag.hashCode();
     }
 
     @Override

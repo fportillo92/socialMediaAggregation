@@ -64,6 +64,10 @@ public class User {
         }
     }
 
+    public Set<Interest> getInterestsByBoard(String board){
+            return this.boards.get(board);
+    }
+
     public void removeBoard(String board) {
         this.boards.remove(board);
     }

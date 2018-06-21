@@ -14,9 +14,9 @@ import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
 import twitter4j.conf.ConfigurationBuilder;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Component
 public class TwitterService implements ApplicationRunner {
@@ -63,6 +63,13 @@ public class TwitterService implements ApplicationRunner {
         if(tweets.containsKey(interest)){
             return tweets.get(interest);
         } else throw new TwitterException("The interest doesn't have tweets");
+    }
+
+    public synchronized List<Status> getTweetsByList(Set<Interest> interestSet){
+        List<Status> listStatus = new ArrayList<>();
+        interestSet.stream().forEach(x -> listStatus.addAll(tweets.get(x)));
+
+        return listStatus;
     }
 
     public void getTwitterUpdates(){

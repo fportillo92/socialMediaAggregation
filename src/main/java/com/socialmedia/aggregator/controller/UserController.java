@@ -1,7 +1,9 @@
 package com.socialmedia.aggregator.controller;
 
+import com.socialmedia.aggregator.exceptions.InterestException;
 import com.socialmedia.aggregator.exceptions.UserException;
 import com.socialmedia.aggregator.model.User;
+import com.socialmedia.aggregator.service.InterestService;
 import com.socialmedia.aggregator.service.UserService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,8 @@ public class UserController {
 
     @Autowired
     UserService userService;
+    @Autowired
+    InterestService interestService;
 
     @RequestMapping(value = "/users/{username}", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity<User> getUser(@PathVariable("username") String username) {
@@ -55,7 +59,7 @@ public class UserController {
         }
     }
 
-    @RequestMapping(value = "/users/{username}/boards/{board}/add", method = RequestMethod.PUT, produces = "application/json")
+    @RequestMapping(value = "/users/{username}/boards/{board}", method = RequestMethod.PUT, produces = "application/json")
     public ResponseEntity<User> addBoard(@PathVariable("username") String username, @PathVariable("board") String board) {
         try {
             return new ResponseEntity<User>(userService.addBoard(username, board), HttpStatus.OK);
@@ -66,29 +70,7 @@ public class UserController {
         }
     }
 
-    @RequestMapping(value = "/users/{username}/boards/{board}/interests/{interest}/addHashtag", method = RequestMethod.PUT, produces = "application/json")
-    public ResponseEntity<User> addHashtagInterestToBoard(@PathVariable("username") String username, @PathVariable("board") String board, @PathVariable("interest") String hashtag) {
-        try {
-            return new ResponseEntity<User>(userService.addHashtag(username, board, hashtag), HttpStatus.OK);
-        } catch (UserException e) {
-            logger.error("Error adding hashtag");
-            e.printStackTrace();
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-
-    @RequestMapping(value = "/users/{username}/boards/{board}/interests/{interest}/addUserTag", method = RequestMethod.PUT, produces = "application/json")
-    public ResponseEntity<User> addUserInterestToBoard(@PathVariable("username") String username, @PathVariable("board") String board, @PathVariable("interest") String usertag) {
-        try {
-            return new ResponseEntity<User>(userService.addUserTag(username, board, usertag), HttpStatus.OK);
-        } catch (UserException e) {
-            logger.error("Error adding usertag");
-            e.printStackTrace();
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-
-    @RequestMapping(value = "/users/{username}/boards/{board}/remove", method = RequestMethod.DELETE, produces = "application/json")
+    @RequestMapping(value = "/users/{username}/boards/{board}", method = RequestMethod.DELETE, produces = "application/json")
     public ResponseEntity<User> removeBoard(@PathVariable("username") String username, @PathVariable("board") String board) {
         try {
             userService.removeBoard(username, board);
@@ -100,7 +82,39 @@ public class UserController {
         }
     }
 
-    @RequestMapping(value = "/users/{username}/boards/{board}/interests/{interest}/removeHashTag", method = RequestMethod.DELETE, produces = "application/json")
+    @RequestMapping(value = "/users/{username}/boards/{board}/interests/{interest}/hashtag", method = RequestMethod.PUT, produces = "application/json")
+    public ResponseEntity<User> addHashtagInterestToBoard(@PathVariable("username") String username, @PathVariable("board") String board, @PathVariable("interest") String hashtag) {
+        try {
+            interestService.addHashtag(hashtag);
+            return new ResponseEntity<User>(userService.addHashtag(username, board, hashtag), HttpStatus.OK);
+        } catch (UserException e) {
+            logger.error("Error adding hashtag to User");
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        } catch (InterestException f){
+            logger.error("Error adding hashtag to Database");
+            f.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @RequestMapping(value = "/users/{username}/boards/{board}/interests/{interest}/usertag", method = RequestMethod.PUT, produces = "application/json")
+    public ResponseEntity<User> addUserInterestToBoard(@PathVariable("username") String username, @PathVariable("board") String board, @PathVariable("interest") String usertag) {
+        try {
+            interestService.addUsertagg(usertag);
+            return new ResponseEntity<User>(userService.addUserTag(username, board, usertag), HttpStatus.OK);
+        } catch (UserException e) {
+            logger.error("Error adding usertag");
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        } catch (InterestException f){
+            logger.error("Error adding usertag to Database");
+            f.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @RequestMapping(value = "/users/{username}/boards/{board}/interests/{interest}/hashtag", method = RequestMethod.DELETE, produces = "application/json")
     public ResponseEntity<User> removeHashTag(@PathVariable("username") String username, @PathVariable("board") String board, @PathVariable("interest") String hashtag) {
         try {
             userService.removeHashtag(username, board, hashtag);
@@ -112,7 +126,7 @@ public class UserController {
         }
     }
 
-    @RequestMapping(value = "/users/{username}/boards/{board}/interests/{interest}/removeUserTag", method = RequestMethod.DELETE, produces = "application/json")
+    @RequestMapping(value = "/users/{username}/boards/{board}/interests/{interest}/usertag", method = RequestMethod.DELETE, produces = "application/json")
     public ResponseEntity<User> removeUserTag(@PathVariable("username") String username, @PathVariable("board") String board, @PathVariable("interest") String usertag) {
         try {
             userService.removeUserTag(username, board, usertag);
@@ -135,5 +149,7 @@ public class UserController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+
 
 }

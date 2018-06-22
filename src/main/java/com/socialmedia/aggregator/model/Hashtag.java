@@ -35,7 +35,7 @@ public class Hashtag implements Interest {
 
     @Override
     public int hashCode() {
-        return _id.hashCode() * tag.hashCode();
+        return tag.hashCode() * tag.hashCode();
     }
 
 

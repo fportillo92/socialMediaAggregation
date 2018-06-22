@@ -50,7 +50,7 @@ public class TwitterService implements ApplicationRunner {
         getTwitterUpdates();
     }
 
-    @Scheduled(fixedRate = 5000)
+    @Scheduled(fixedRate = 5000000)
     public void getUpdates(){
         logger.info("Updating interests...");
         interests = interestDao.getAllInterest();

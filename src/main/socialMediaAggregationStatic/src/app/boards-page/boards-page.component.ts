@@ -1,8 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { Board } from '../model/Board';
-import { BoardsService } from '../service/boards-service.service';
-import {Observable} from 'rxjs';
-
+import {Component, OnInit} from '@angular/core';
+import {Board} from '../model/Board';
+import {BoardsService} from '../service/boards-service.service';
+import {TweetsService} from '../service/tweets-service.service';
 
 
 @Component({
@@ -12,12 +11,16 @@ import {Observable} from 'rxjs';
 })
 export class BoardsPageComponent implements OnInit {
 
-  boards: Observable<Board[]>;
+  boards: Board[];
 
-  constructor(private boardsService: BoardsService) { }
+  constructor(private boardsService: BoardsService, private tweetsService: TweetsService) {
+  }
 
   ngOnInit() {
-    this.boards = this.boardsService.getBoards();
+    this.boardsService.getBoards().then(data => {
+      this.boards = data;
+    });
+
   }
 
 }

@@ -1,19 +1,4 @@
-<p>
-  boards-page works!
-</p>
-<ul class="search-result">
-  <li *ngFor="let board of boards | async" >
-    <mat-card>
-      <mat-card-header>
-        <img mat-card-avatar src="https://source.unsplash.com/random/200x200">
-        <mat-card-title>{{ board }}</mat-card-title>
-        <mat-card-subtitle>Really, they are!</mat-card-subtitle>
-      </mat-card-header>
-      <img mat-card-image src="https://source.unsplash.com/random/800x600">
-      <mat-card-content>
-        <p>Something pretty...</p>
-      </mat-card-content>
-    </mat-card>
-  </li>
-</ul>
-
+<div *ngFor="let board of boards">
+  <h3>{{ board }}</h3>
+  <app-tweets-page [board]="board"></app-tweets-page>
+</div>

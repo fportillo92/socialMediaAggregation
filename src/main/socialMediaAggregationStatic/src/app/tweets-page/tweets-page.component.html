@@ -1,0 +1,17 @@
+<mat-grid-list cols="3" rowHeight="1:1">
+<div *ngFor="let tweet of tweets">
+    <mat-grid-tile>
+      <mat-list-item>
+        <mat-card>
+          <mat-card-header>
+            <mat-card-title>{{ tweet.text }}</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <p>{{ tweet.user}}</p>
+          </mat-card-content>
+        </mat-card>
+      </mat-list-item>
+    </mat-grid-tile>
+</div>
+</mat-grid-list>
+

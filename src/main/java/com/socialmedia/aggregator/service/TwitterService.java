@@ -67,7 +67,13 @@ public class TwitterService implements ApplicationRunner {
 
     public synchronized List<Status> getTweetsByList(Set<Interest> interestSet){
         List<Status> listStatus = new ArrayList<>();
-        interestSet.stream().forEach(x -> listStatus.addAll(tweets.get(x)));
+        interestSet.stream().forEach(interest -> {
+            try {
+                listStatus.addAll(this.getTweetsByInterest(interest));
+            } catch (TwitterException e) {
+                e.printStackTrace();
+            }
+        });
 
         return listStatus;
     }

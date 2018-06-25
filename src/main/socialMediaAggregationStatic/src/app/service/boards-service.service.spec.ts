@@ -1,15 +1,15 @@
 import { TestBed, inject } from '@angular/core/testing';
 
-import { BoardsServiceService } from './boards-service.service';
+import { BoardsService } from './boards-service.service';
 
 describe('BoardsServiceService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [BoardsServiceService]
+      providers: [BoardsService]
     });
   });
 
-  it('should be created', inject([BoardsServiceService], (service: BoardsServiceService) => {
+  it('should be created', inject([BoardsService], (service: BoardsService) => {
     expect(service).toBeTruthy();
   }));
 });

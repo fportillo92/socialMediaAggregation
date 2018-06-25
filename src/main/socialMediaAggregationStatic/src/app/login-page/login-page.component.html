@@ -1,3 +1,5 @@
-<p>
-  login-page works!
-</p>
+<form #loginForm="ngForm" (ngSubmit)="onFormSubmit(loginForm)" class="container">
+    <input matInput placeholder="User" name="username" id="username" ngModel>
+    <input matInput type="password" placeholder="Password" id="password" name="password" ngModel>
+    <button matt-button>Login</button>
+</form>

@@ -11,15 +11,13 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import twitter4j.Status;
 
 import java.util.List;
 import java.util.Set;
 
+@CrossOrigin
 @RestController
 public class BoardController {
 
@@ -34,6 +32,7 @@ public class BoardController {
     @Autowired
     TwitterService twitterService;
 
+    @CrossOrigin
     @RequestMapping(value = "/users/{username}/boards/{board}", method = RequestMethod.PUT, produces = "application/json")
     public ResponseEntity<User> addBoard(@PathVariable("username") String username, @PathVariable("board") String board) {
         try {
@@ -45,6 +44,7 @@ public class BoardController {
         }
     }
 
+    @CrossOrigin
     @RequestMapping(value = "/users/{username}/boards/{board}", method = RequestMethod.DELETE, produces = "application/json")
     public ResponseEntity<User> removeBoard(@PathVariable("username") String username, @PathVariable("board") String board) {
         try {
@@ -57,6 +57,7 @@ public class BoardController {
         }
     }
 
+    @CrossOrigin
     @RequestMapping(value = "/users/{username}/boards/{board}/interests/{interest}/hashtag", method = RequestMethod.PUT, produces = "application/json")
     public ResponseEntity<User> addHashtagInterestToBoard(@PathVariable("username") String username, @PathVariable("board") String board, @PathVariable("interest") String hashtag) {
         try {
@@ -73,6 +74,7 @@ public class BoardController {
         }
     }
 
+    @CrossOrigin
     @RequestMapping(value = "/users/{username}/boards/{board}/interests/{interest}/usertag", method = RequestMethod.PUT, produces = "application/json")
     public ResponseEntity<User> addUserInterestToBoard(@PathVariable("username") String username, @PathVariable("board") String board, @PathVariable("interest") String usertag) {
         try {
@@ -89,6 +91,7 @@ public class BoardController {
         }
     }
 
+    @CrossOrigin
     @RequestMapping(value = "/users/{username}/boards/{board}/interests/{interest}/hashtag", method = RequestMethod.DELETE, produces = "application/json")
     public ResponseEntity<User> removeHashTag(@PathVariable("username") String username, @PathVariable("board") String board, @PathVariable("interest") String hashtag) {
         try {
@@ -101,6 +104,7 @@ public class BoardController {
         }
     }
 
+    @CrossOrigin
     @RequestMapping(value = "/users/{username}/boards/{board}/interests/{interest}/usertag", method = RequestMethod.DELETE, produces = "application/json")
     public ResponseEntity<User> removeUserTag(@PathVariable("username") String username, @PathVariable("board") String board, @PathVariable("interest") String usertag) {
         try {
@@ -113,6 +117,7 @@ public class BoardController {
         }
     }
 
+    @CrossOrigin
     @RequestMapping(value = "/users/{username}/boards/", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity<Set<String>> getBoards(@PathVariable("username") String username) {
 
@@ -125,6 +130,7 @@ public class BoardController {
         }
     }
 
+    @CrossOrigin
     @RequestMapping(value = "/users/{username}/boards/{board}/interests", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity<List<Status>> getInterestByBoard(@PathVariable("username") String username, @PathVariable("board") String board) {
 

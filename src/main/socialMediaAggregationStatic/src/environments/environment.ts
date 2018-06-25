@@ -4,8 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:8080/users/fitibirlo1/boards/',
-  apiUrlTweets: 'http://localhost:8080/users/fitibirlo1/boards/deportes/interests'
+  apiUrl: 'http://localhost:8080/users/fitibirlo1',
 
 };
 

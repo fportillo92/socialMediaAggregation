@@ -19,9 +19,8 @@ export class TweetsPageComponent implements OnInit {
 
   ngOnInit() {
     console.log(this.board);
-    this.tweetsService.getTweets().then(data => {
+    this.tweetsService.getTweets(this.board).then(data => {
       this.tweets = data;
-
     });
 
   }

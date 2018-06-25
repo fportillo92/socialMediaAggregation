@@ -23,6 +23,7 @@ public class UserController {
     @Autowired
     InterestService interestService;
 
+    @CrossOrigin
     @RequestMapping(value = "/users/{username}", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity<User> getUser(@PathVariable("username") String username) {
 
@@ -35,7 +36,7 @@ public class UserController {
         }
     }
 
-
+    @CrossOrigin
     @RequestMapping(value = "/users/", method = RequestMethod.POST, produces = "application/json")
     public ResponseEntity<User> createUser(@RequestBody final User user) {
         try {
@@ -47,6 +48,7 @@ public class UserController {
         }
     }
 
+    @CrossOrigin
     @RequestMapping(value = "/users/", method = RequestMethod.DELETE, produces = "application/json")
     public ResponseEntity<User> removeUser(@RequestBody final User user) {
         try {

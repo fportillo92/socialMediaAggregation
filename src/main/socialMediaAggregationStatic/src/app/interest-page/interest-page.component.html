@@ -1,0 +1,12 @@
+<form #formInterest="ngForm">
+
+  <label for="tag">Tag</label>
+  <select [(ngModel)]="selectedOption" name="selectedOption">
+    <option value="hashtag">#</option>
+    <option value="usertag">@</option>
+  </select>
+  <input  [(ngModel)] = "tag" type="text" name="tag" id="tag">
+
+  <button (click)="add()" >add</button>
+
+</form>
